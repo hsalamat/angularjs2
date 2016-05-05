@@ -1,0 +1,166 @@
+# angularjs2: developer setup. This setup works for all platforms (Mac OS X, Windows, and Linux).
+
+node.js is a server-side JavaScript runtime
+angular is a client-side (browser) framework
+
+Angular.js2 is using EcmaScript 5/6 or TypeScript. Will EcmaScript work on IIS without iisnode? there wont be any issues working with angular2 and IIS. just make sure how you handle the dependencies because most javascript frameworks make use of npm for dependency management!
+
+developer environment setup
+
+1. Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Install Node.js: https://nodejs.org/en/
+
+2. NPM (Node Package Manager) is automatically installed when you install Node. NPM allows developers to share their libraries. NPM can be accessed  via command line on Windows PC or Terminal on OS X or Linux.
+
+Note: If you are behind a corporate web proxy: Set the proxy and https-proxy settings by typing:
+npm config set proxy http://proxy.company.com:8080
+npm config set https-proxy http://proxy.company.com:8080
+
+3. Install "typescript" package "globally" (not project dependent).
+  Windows: run the command prompt as an administrator: npm install -g typescript
+  OS X or Linux: open the terminal: sudo npm install -g typescript
+
+4. Install a code editor that supports typescript. If you are a .NET developer, install:
+   Windows: visual studio 2015 or code.visualstudio.com
+   OS X or Linux: code.visualstudio.com
+
+5. Install angular command interface:
+   Windows: run the command prompt as an administrator: npm install -g angular-cli
+   OS X or Linux: open the terminal: sudo npm install -g angular-cli
+
+ 6. Create a new project folder "angularjsworkspace" and inside the folder, create a package.json file by typing from the command line:    npm init
+    Note: you'll get prompted with bunch of questions.
+
+    c:\angularjsworkspace >npm init
+
+    This utility will walk you through creating a package.json file. It only covers the most common items, and tries to guess sensible defaults. Don't worry about the answers when you run this utility, because you are going to replace to package.json content with the following:
+
+{
+  "name": "angular2-quickstart",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "typings": "typings",
+    "postinstall": "typings install"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "angular2": "2.0.0-beta.7",
+    "systemjs": "0.19.22",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.3",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
+    "zone.js": "0.5.15"
+  },
+  "devDependencies": {
+    "concurrently": "^2.0.0",
+    "lite-server": "^2.1.0",
+    "typescript": "^1.7.5"
+  }
+}
+
+7. In the workspace folder (c:\angularjsworkspace),
+a) create a file: tsconfig.json
+b) create a file: typings.json
+c) create a file: index.html
+d) create a folder called "app"
+
+8.Paste the following in tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false
+  },
+  "exclude": [
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
+  ]
+}
+
+9. Paste the following in typings.json
+{
+  "ambientDependencies": {
+    "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#6697d6f7dadbf5773cb40ecda35a76027e0783b2"
+  }
+}
+
+
+10. paste the following in index.html
+<html>
+
+  <head>
+    <title>Angular 2 QuickStart</title>
+
+    <!-- 1. Load libraries -->
+    <!-- IE required polyfills, in this exact order -->
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script>
+      System.config({
+        packages: {
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('app/boot')
+            .then(null, console.error.bind(console));
+    </script>
+
+  </head>
+
+  <!-- 3. Display the application -->
+  <body>
+    <my-app>Loading...</my-app>
+  </body>
+
+</html>
+
+11. create two files under "app" folder
+a) app.component.ts
+b) boot.ts
+
+12. paste the following in app.component.ts:
+import {Component} from 'angular2/core';
+
+@Component({
+    selector: 'my-app',
+    template: '<h1>My First Angular 2 App</h1>'
+})
+export class AppComponent { }
+
+13. paste the following in boot.ts:
+import {bootstrap}    from 'angular2/platform/browser'
+import {AppComponent} from './app.component'
+
+bootstrap(AppComponent);
+
+14. Go to vs code editor and open your workspace and verify everything all the files are there.
+
+15. Let's install the app.
+  Windows: run the command prompt as an administrator, go to your "workspace" folder and type: npm install
+  OS X or Linux: open the terminal, go to your "workspace" folder and type: npm install
+
+16. Once dependencies are installed, you will see a new folder called np_modules
+
+17. back to the terminal in the same workspace, and type npm start
+
+18. If you are just seeing: loading... in the browser, your browser might not be supporting angular 2, copy the URL and paste it in google chrome browser!
