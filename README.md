@@ -16,7 +16,7 @@ Note: If you are behind a corporate web proxy: Set the proxy and https-proxy set
 npm config set proxy http://proxy.company.com:8080
 npm config set https-proxy http://proxy.company.com:8080
 
-3. Let's install "typescript" package "globally" (not project dependent).
+3. Install "typescript" package "globally" (not project dependent).
   Windows: run the command prompt as an administrator: npm install -g typescript
   OS X or Linux: open the terminal: sudo npm install -g typescript
 
@@ -28,14 +28,12 @@ npm config set https-proxy http://proxy.company.com:8080
    Windows: run the command prompt as an administrator: npm install -g angular-cli
    OS X or Linux: open the terminal: sudo npm install -g angular-cli
 
- 6. Create a new project folder angularjsworkspace and inside the folder, create a package.json file by typing from the command line: npm init
-Note: you'll get prompted with bunch of questions.
+ 6. Create a new project folder "angularjsworkspace" and inside the folder, create a package.json file by typing from the command line:    npm init
+    Note: you'll get prompted with bunch of questions.
 
-c:\hooman\angularjsworkspace >npm init
-This utility will walk you through creating a package.json file.
-It only covers the most common items, and tries to guess sensible defaults.
-
-don't worry about the answers, because you are going to replace to package.json content with the following:
+    c:\hooman\angularjsworkspace >npm init
+    
+    This utility will walk you through creating a package.json file. It only covers the most common items, and tries to guess sensible defaults. Don't worry about the answers when you run this utility, because you are going to replace to package.json content with the following:
 
 {
   "name": "angular2-quickstart",
@@ -166,4 +164,4 @@ bootstrap(AppComponent);
 
 17. back to the terminal in the same workspace, and type npm start
 
-18. If you are just seeing: loading...copy the URL and google chrome browser!
+18. If you are just seeing: loading... in the browser, your browser might not be supporting angular 2, copy the URL and paste it in google chrome browser!
